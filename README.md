@@ -29,7 +29,7 @@ Resume Builder is a web application built with React that allows users to create
 
 ## Demo
 
-To see a live demo of the Resume Builder application, watch our demo video showcasing its functionality.
+To see a live demo of the Resume Builder application, visit [Resume Builder Website](https://www.example.com).
 
 ## Sample Data
 
@@ -39,7 +39,7 @@ The application includes a "Load Sample Data" button to populate the form with p
 
 - React
 - Bootstrap
-- JavaScript (ES6+)
+- JavaScript
 - HTML5
 - CSS3
 
