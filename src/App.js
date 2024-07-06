@@ -1,5 +1,3 @@
-// App.js
-
 import React, { useState } from 'react';
 import './App.css';
 
@@ -22,7 +20,6 @@ function App() {
 
   const [technicalSkills, setTechnicalSkills] = useState([]);
 
-  // Function to handle changes in personal information
   const handlePersonalInfoChange = (e) => {
     const { id, value } = e.target;
     setPersonalInfo((prevInfo) => ({
@@ -31,12 +28,10 @@ function App() {
     }));
   };
 
-  // Function to handle changes in objective
   const handleObjectiveChange = (e) => {
     setObjective(e.target.value);
   };
 
-  // Function to add a new work experience box
   const addWorkExperience = () => {
     setWorkExpCount(workExpCount + 1);
     const newWorkExp = {
@@ -46,12 +41,11 @@ function App() {
       location: '',
       startDate: '',
       endDate: '',
-      descriptions: [''] // Initial description
+      descriptions: [''] 
     };
     setWorkExperiences([...workExperiences, newWorkExp]);
   };
 
-  // Function to handle changes in work experience fields
   const handleWorkExpChange = (id, field, value) => {
     const updatedWorkExps = workExperiences.map((exp) =>
       exp.id === id ? { ...exp, [field]: value } : exp
@@ -59,14 +53,12 @@ function App() {
     setWorkExperiences(updatedWorkExps);
   };
 
-  // Function to delete a work experience
   const deleteWorkExperience = (id) => {
     const updatedWorkExps = workExperiences.filter((exp) => exp.id !== id);
     setWorkExpCount(workExpCount - 1);
     setWorkExperiences(updatedWorkExps);
   };
 
-  // Function to add a new education box
   const addEducation = () => {
     setEduCount(eduCount + 1);
     const newEducation = {
@@ -122,113 +114,320 @@ function App() {
     setTechnicalSkills(updatedSkills);
   };
 
-  // Function to download resume data as JSON
-  const downloadResume = () => {
-    const resumeData = {
-      personalInfo,
-      objective,
-      workExperiences,
-      educations,
-      technicalSkills
-    };
-    const json = JSON.stringify(resumeData, null, 2);
-    const blob = new Blob([json], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'resume.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+  const formatDate = (dateStr) => {
+    const [year, month] = dateStr.split('-');
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    return `${monthNames[parseInt(month, 10) - 1]} ${year}`;
   };
 
-  const loadSampleData = () => {
-    const sampleData = {
-        "personalInfo": {
-            "name": "John Doe",
-            "email": "john.doe@example.com",
-            "phone": "123-456-7890",
-            "linkedin": "https://www.linkedin.com/in/johndoe",
-            "github": "https://github.com/johndoe"
-        },
-        "objective": "Experienced software engineer passionate about building robust web applications and solving complex technical challenges.",
-        "workExperiences": [
-            {
-                "id": 1,
-                "companyName": "ABC Tech Solutions",
-                "jobTitle": "Senior Software Engineer",
-                "location": "New York, NY",
-                "startDate": "2018-06-01",
-                "endDate": "2022-12-31",
-                "descriptions": [
-                    "Led development of a microservices architecture using Docker and Kubernetes",
-                    "Managed a team of 5 developers, ensuring adherence to coding standards and project timelines"
-                ]
-            },
-            {
-                "id": 2,
-                "companyName": "XYZ Innovations",
-                "jobTitle": "Software Developer",
-                "location": "San Francisco, CA",
-                "startDate": "2015-09-01",
-                "endDate": "2018-05-31",
-                "descriptions": [
-                    "Designed and implemented RESTful APIs for a scalable backend infrastructure",
-                    "Integrated third-party APIs for payment processing and user authentication"
-                ]
-            }
-        ],
-        "educations": [
-            {
-                "id": 1,
-                "schoolName": "University of Example",
-                "degree": "Master of Science in Computer Science",
-                "location": "Example City, CA",
-                "startDate": "2012-09-01",
-                "endDate": "2014-05-31",
-                "descriptions": [
-                    "Focused on distributed systems and cloud computing",
-                    "Thesis on optimization algorithms for large-scale data processing"
-                ]
-            },
-            {
-                "id": 2,
-                "schoolName": "Example State College",
-                "degree": "Bachelor of Science in Computer Engineering",
-                "location": "Example Town, CA",
-                "startDate": "2008-09-01",
-                "endDate": "2012-05-31",
-                "descriptions": [
-                    "Graduated with highest honors",
-                    "Coursework in computer architecture, embedded systems, and digital signal processing"
-                ]
-            }
-        ],
-        "technicalSkills": [
-            {
-                "id": 1,
-                "category": "Frontend Development",
-                "values": "React, Angular, Vue.js, JavaScript, HTML, CSS, Sass"
-            },
-            {
-                "id": 2,
-                "category": "Backend Development",
-                "values": "Node.js, Python, Ruby on Rails, Express, MongoDB, PostgreSQL"
-            },
-            {
-                "id": 3,
-                "category": "DevOps",
-                "values": "Docker, Kubernetes, AWS, Azure, Jenkins"
-            },
-            {
-                "id": 4,
-                "category": "Database Systems",
-                "values": "MySQL, PostgreSQL, MongoDB, Redis"
-            }
-        ]
-    };
+  const generateLatex = () => {
+    return `
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
 
+\\documentclass[letterpaper,11pt]{article}
+
+\\usepackage{latexsym}
+\\usepackage[empty]{fullpage}
+\\usepackage{titlesec}
+\\usepackage{marvosym}
+\\usepackage[usenames,dvipsnames]{color}
+\\usepackage{verbatim}
+\\usepackage{enumitem}
+\\usepackage[hidelinks]{hyperref}
+\\usepackage{fancyhdr}
+\\usepackage[english]{babel}
+\\usepackage{tabularx}
+\\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \\usepackage[sfdefault]{FiraSans}
+% \\usepackage[sfdefault]{roboto}
+% \\usepackage[sfdefault]{noto-sans}
+% \\usepackage[default]{sourcesanspro}
+
+% serif
+% \\usepackage{CormorantGaramond}
+% \\usepackage{charter}
+
+
+\\pagestyle{fancy}
+\\fancyhf{} % clear all header and footer fields
+\\fancyfoot{}
+\\renewcommand{\\headrulewidth}{0pt}
+\\renewcommand{\\footrulewidth}{0pt}
+
+% Adjust margins
+\\addtolength{\\oddsidemargin}{-0.5in}
+\\addtolength{\\evensidemargin}{-0.5in}
+\\addtolength{\\textwidth}{1in}
+\\addtolength{\\topmargin}{-.5in}
+\\addtolength{\\textheight}{1.0in}
+
+\\urlstyle{same}
+
+\\raggedbottom
+\\raggedright
+\\setlength{\\tabcolsep}{0in}
+
+% Sections formatting
+\\titleformat{\\section}{
+  \\vspace{-4pt}\\scshape\\raggedright\\large
+}{}{0em}{}[\\color{black}\\titlerule \\vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\\newcommand{\\resumeItem}[1]{
+  \\item\\small{
+    {#1 \\vspace{-2pt}}
+  }
+}
+
+\\newcommand{\\resumeSubheading}[4]{
+  \\vspace{-2pt}\\item
+    \\begin{tabular*}{0.97\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}
+      \\textbf{#1} & #2 \\\\
+      \\textit{\\small#3} & \\textit{\\small #4} \\\\
+    \\end{tabular*}\\vspace{-7pt}
+}
+
+\\newcommand{\\resumeSubSubheading}[2]{
+    \\item
+    \\begin{tabular*}{0.97\\textwidth}{l@{\\extracolsep{\\fill}}r}
+      \\textit{\\small#1} & \\textit{\\small #2} \\\\
+    \\end{tabular*}\\vspace{-7pt}
+}
+
+\\newcommand{\\resumeProjectHeading}[2]{
+    \\item
+    \\begin{tabular*}{0.97\\textwidth}{l@{\\extracolsep{\\fill}}r}
+      \\small#1 & #2 \\\\
+    \\end{tabular*}\\vspace{-7pt}
+}
+
+\\newcommand{\\resumeSubItem}[1]{\\resumeItem{#1}\\vspace{-4pt}}
+
+\\renewcommand\\labelitemii{$\\vcenter{\\hbox{\\tiny$\\bullet$}}$}
+
+\\newcommand{\\resumeSubHeadingListStart}{\\begin{itemize}[leftmargin=0.15in, label={}]}
+\\newcommand{\\resumeSubHeadingListEnd}{\\end{itemize}}
+\\newcommand{\\resumeItemListStart}{\\begin{itemize}}
+\\newcommand{\\resumeItemListEnd}{\\end{itemize}\\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\\begin{document}
+
+%----------HEADING----------
+\\begin{center}
+    \\textbf{\\Huge \\scshape ${personalInfo.name}} \\\\ \\vspace{1pt}
+    \\small ${personalInfo.phone} $|$ \\href{mailto:${personalInfo.email}}{\\underline{${personalInfo.email}}} $|$ 
+    \\href{${personalInfo.linkedin}}{\\underline{${personalInfo.linkedin}}} $|$
+    \\href{${personalInfo.github}}{\\underline{${personalInfo.github}}}
+\\end{center}
+
+%-----------Objective-----------
+\\section{Objective}
+    ${objective}
+
+
+
+%-----------EDUCATION-----------
+\\section{Education}
+  \\resumeSubHeadingListStart
+    ${educations.map(edu => `
+      \\resumeSubheading
+        {${edu.schoolName}}{${edu.location}}
+        {${edu.degree}}{${formatDate(edu.startDate)} -- ${formatDate(edu.endDate)}}
+        \\resumeItemListStart
+          ${edu.descriptions.map(desc => `\\resumeItem{${desc}}`).join('')}
+        \\resumeItemListEnd
+
+    `).join('')}
+  \\resumeSubHeadingListEnd
+
+
+%-----------EXPERIENCE-----------
+\\section{Experience}
+  \\resumeSubHeadingListStart
+    ${workExperiences.map(exp => `
+      \\resumeSubheading
+        {${exp.companyName}}{${exp.location}}
+    {${exp.jobTitle}} {${formatDate(exp.startDate)} -- ${formatDate(exp.endDate)}}
+
+        \\resumeItemListStart
+          ${exp.descriptions.map(desc => `\\resumeItem{${desc}}`).join('')}
+        \\resumeItemListEnd
+    `).join('')}
+  \\resumeSubHeadingListEnd
+
+
+%-----------TECHNICAL SKILLS-----------
+\\section{Technical Skills}
+ \\begin{itemize}[leftmargin=0.15in, label={}]
+    \\small{${technicalSkills.map(skill => `
+      \\item{
+       \\textbf{${skill.category}}{: ${skill.values}} \\\\
+      }
+    `).join('')}}
+ \\end{itemize}
+
+
+%-------------------------------------------
+\\end{document}
+    `;
+  };
+
+  const downloadLatex = () => {
+    const latexContent = generateLatex();
+    
+    // Create a Blob with the LaTeX content
+    const blob = new Blob([latexContent], { type: 'text/plain' });
+    
+    // Create a link element
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    
+    // Set the file name
+    link.download = 'resume.tex';
+    
+    // Append the link to the body
+    document.body.appendChild(link);
+    
+    // Trigger the download
+    link.click();
+    
+    // Clean up
+    document.body.removeChild(link);
+  };
+
+  const downloadResume = () => {
+      const encodedLatex = encodeURIComponent(generateLatex());
+      const compileUrl = `https://latexonline.cc/compile?text=${encodedLatex}`;
+    
+      // Create a hidden form element
+      const form = document.createElement('form');
+      form.action = compileUrl;
+      form.method = 'GET';
+      form.target = '_blank'; // Open the response in a new tab/window
+    
+      // Create a hidden input field to hold the LaTeX content
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'text';
+      input.value = generateLatex();
+      form.appendChild(input);
+    
+      // Append the form to the document body and submit it
+      document.body.appendChild(form);
+      form.submit();
+    
+      // Remove the form from the document after submission
+      document.body.removeChild(form);
+    };
+     
+
+
+    const loadSampleData = () => {
+      const sampleData = {
+          "personalInfo": {
+              "name": "John Doe",
+              "email": "john.doe@example.com",
+              "phone": "123-456-7890",
+              "linkedin": "https://www.linkedin.com/in/",
+              "github": "https://github.com/"
+          },
+          "objective": "Experienced software engineer passionate about building robust web applications and solving complex technical challenges.",
+          "workExperiences": [
+              {
+                  "id": 1,
+                  "companyName": "ABC Tech Solutions",
+                  "jobTitle": "Senior Software Engineer",
+                  "location": "New York, NY",
+                  "startDate": "2015-09", 
+                  "endDate": "2018-05",  
+                  "descriptions": [
+                      "Led development of a microservices architecture using Docker and Kubernetes",
+                      "Managed a team of 5 developers, ensuring adherence to coding standards and project timelines"
+                  ]
+              },
+              {
+                  "id": 2,
+                  "companyName": "XYZ Innovations",
+                  "jobTitle": "Software Developer",
+                  "location": "San Francisco, CA",
+                  "startDate": "2015-09", // using YYYY-MM format for month input
+                  "endDate": "2018-05",   // using YYYY-MM format for month input
+                  "descriptions": [
+                      "Designed and implemented RESTful APIs for a scalable backend infrastructure",
+                      "Integrated third-party APIs for payment processing and user authentication"
+                  ]
+              }
+          ],
+          "educations": [
+              {
+                  "id": 1,
+                  "schoolName": "University of Example",
+                  "degree": "Master of Science in Computer Science",
+                  "location": "Example City, CA",
+                  "startDate": "2015-09", // using YYYY-MM format for month input
+                  "endDate": "2018-05",   // using YYYY-MM format for month input
+                  "descriptions": [
+                      "Focused on distributed systems and cloud computing",
+                      "Thesis on optimization algorithms for large-scale data processing"
+                  ]
+              },
+              {
+                  "id": 2,
+                  "schoolName": "Example State College",
+                  "degree": "Bachelor of Science in Computer Engineering",
+                  "location": "Example Town, CA",
+                  "startDate": "2015-09", // using YYYY-MM format for month input
+                  "endDate": "2018-05",   // using YYYY-MM format for month input
+                  "descriptions": [
+                      "Graduated with highest honors",
+                      "Coursework in computer architecture, embedded systems, and digital signal processing"
+                  ]
+              }
+          ],
+          "technicalSkills": [
+              {
+                  "id": 1,
+                  "category": "Frontend Development",
+                  "values": "React, Angular, Vue.js, JavaScript, HTML, CSS, Sass"
+              },
+              {
+                  "id": 2,
+                  "category": "Backend Development",
+                  "values": "Node.js, Python, Ruby on Rails, Express, MongoDB, PostgreSQL"
+              },
+              {
+                  "id": 3,
+                  "category": "DevOps",
+                  "values": "Docker, Kubernetes, AWS, Azure, Jenkins"
+              },
+              {
+                  "id": 4,
+                  "category": "Database Systems",
+                  "values": "MySQL, PostgreSQL, MongoDB, Redis"
+              }
+          ]
+  };
+  
     // Assuming setPersonalInfo, setObjective, setWorkExperiences, setEducations, and setTechnicalSkills are functions to set data in your application state
     setPersonalInfo(sampleData.personalInfo);
     setObjective(sampleData.objective);
@@ -240,25 +439,16 @@ function App() {
 
   return (
     <div className="container mt-4">
-      <h1 className="text-center mb-4">Resume Builder</h1>
-
- {/* Buttons Section */}
- <div className="text-center mb-4">
-        <button
-          className="btn btn-primary mr-3"
-          onClick={loadSampleData}
-        >
-          Load Sample Data
-        </button>
-        <button
-          className="btn btn-success"
-          onClick={downloadResume}
-        >
-          Download Resume
-        </button>
-      </div>
-
-
+    <h1 className="text-center mb-4">Resume Builder</h1>
+    {/* <h5 className="text-center text-primary">No data validation done (i.e. Making sure valid LinkedIn profile).</h5> */}
+  
+    {/* Buttons Section */}
+    <div className="text-center mb-4">
+      <button className="btn btn-primary mr-3" onClick={loadSampleData}>
+        Load Sample Data
+      </button>
+    </div>
+  
 
       {/* Personal Information Section */}
       <div className="section-container" style={{ backgroundColor: '#fff', border: '1px solid #dee2e6', borderRadius: '5px', padding: '20px', marginBottom: '20px' }}>
@@ -397,18 +587,19 @@ function App() {
                   <div className="col-md-6">
                     <div className="form-row">
                       <div className="col">
-                        <input
-                          type="date"
-                          className="form-control"
-                          placeholder="Start Date"
-                          value={exp.startDate}
-                          onChange={(e) => handleWorkExpChange(exp.id, 'startDate', e.target.value)}
-                          required
-                        />
+                      <input
+                type="month"
+                className="form-control"
+                placeholder="Start Date"
+                value={exp.startDate}
+                onChange={(e) => handleWorkExpChange(exp.id, 'startDate', e.target.value)}
+                required
+              />
+
                       </div>
                       <div className="col">
                         <input
-                          type="date"
+                          type="month"
                           className="form-control"
                           placeholder="End Date"
                           value={exp.endDate}
@@ -532,7 +723,7 @@ function App() {
               <div className="form-row">
                 <div className="col">
                   <input
-                    type="date"
+                    type="month"
                     className="form-control"
                     placeholder="Start Date"
                     value={edu.startDate}
@@ -542,7 +733,7 @@ function App() {
                 </div>
                 <div className="col">
                   <input
-                    type="date"
+                    type="month"
                     className="form-control"
                     placeholder="End Date"
                     value={edu.endDate}
@@ -674,11 +865,18 @@ function App() {
       {/* Download Resume Section */}
       <div className="text-center">
         <button
+          className="btn btn-danger"
+          onClick={downloadLatex}
+          style={{ fontSize: '1rem', padding: '10px 30px', marginRight:'10px', marginBottom: '20px' }}
+        >
+          Download Tex
+        </button>
+        <button
           className="btn btn-success"
           onClick={downloadResume}
           style={{ fontSize: '1rem', padding: '10px 30px', marginBottom: '20px' }}
         >
-          Download Resume
+          Download PDF Resume
         </button>
       </div>
     </div>
