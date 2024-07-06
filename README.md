@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# Resume Builder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Resume Builder is a web application built with React that allows users to create and download their resumes in JSON format. This application provides a structured interface to input personal information, work experiences, education details, objective, and technical skills.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Personal Information**: Input and edit personal details such as name, email, phone number, LinkedIn profile, and GitHub profile.
+  
+- **Objective**: Define career objectives using a text area input.
 
-### `npm start`
+- **Work Experience**: Add, edit, and delete multiple work experiences, including details like company name, job title, location, start and end dates, and descriptions.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Education**: Add, edit, and delete educational qualifications, including school name, degree, location, start and end dates, and descriptions.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Technical Skills**: Add, edit, and delete categories of technical skills with associated skills (comma-separated).
 
-### `npm test`
+- **Download Resume**: Generate a JSON file containing all entered information for downloading as a resume.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Use
 
-### `npm run build`
+1. **Access the Website**: Visit our [Resume Builder Website](https://www.example.com) to start using the application.
+   
+2. **Create Your Resume**:
+   - Fill in your resume details using the provided input fields.
+   - Utilize the "Add" and "Delete" buttons to manage work experiences, education details, and technical skills.
+   
+3. **Download Your Resume**:
+   - After entering your information, click on the "Download Resume" button to obtain the JSON file of your resume data.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Demo
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To see a live demo of the Resume Builder application, watch our demo video showcasing its functionality.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Sample Data
 
-### `npm run eject`
+The application includes a "Load Sample Data" button to populate the form with pre-defined sample information for testing purposes.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Technologies Used
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- React
+- Bootstrap
+- JavaScript (ES6+)
+- HTML5
+- CSS3
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## License
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the Common Core License.
