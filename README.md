@@ -18,7 +18,7 @@ Resume Builder is a web application built with React that allows users to create
 
 ## Demo
 
-To see a live demo of the Resume Builder application, visit [Resume Builder Website](https://www.example.com).
+To see a live demo of the Resume Builder application, visit [Resume Builder Website](https://latex-resume-generator.netlify.app/).
 
 ## Sample Data
 
