@@ -20,10 +20,31 @@ function App() {
 
   const [technicalSkills, setTechnicalSkills] = useState([]);
 
+  const clearAllFields = () => {
+    setPersonalInfo({
+      name: '',
+      email: '',
+      phone: '',
+      linkedin: '',
+      github: ''
+    });
+  
+    setObjective('');
+  
+    setWorkExperiences([]);
+    setWorkExpCount(0);
+  
+    setEducations([]);
+    setEduCount(0);
+  
+    setTechnicalSkills([]);
+  };
+
+  
   const handlePersonalInfoChange = (e) => {
     const { id, value } = e.target;
-    setPersonalInfo((prevInfo) => ({
-      ...prevInfo,
+    setPersonalInfo(prevState => ({
+      ...prevState,
       [id]: value
     }));
   };
@@ -68,12 +89,12 @@ function App() {
       location: '',
       startDate: '',
       endDate: '',
-      descriptions: [''] // Initial description
+      descriptions: [''] 
     };
     setEducations([...educations, newEducation]);
   };
 
-  // Function to handle changes in education fields
+
   const handleEducationChange = (id, field, value) => {
     const updatedEducations = educations.map((edu) =>
       edu.id === id ? { ...edu, [field]: value } : edu
@@ -81,14 +102,14 @@ function App() {
     setEducations(updatedEducations);
   };
 
-  // Function to delete an education
+ 
   const deleteEducation = (id) => {
     setEduCount(eduCount - 1);
     const updatedEducations = educations.filter((edu) => edu.id !== id);
     setEducations(updatedEducations);
   };
 
-  // Function to add a new category of technical skills
+
   const addTechnicalSkillCategory = () => {
     if (technicalSkills.length < 5) {
       const newCategory = {
@@ -100,7 +121,7 @@ function App() {
     }
   };
 
-  // Function to handle changes in technical skills category
+
   const handleTechnicalSkillChange = (id, field, value) => {
     const updatedSkills = technicalSkills.map((skill) =>
       skill.id === id ? { ...skill, [field]: value } : skill
@@ -108,7 +129,7 @@ function App() {
     setTechnicalSkills(updatedSkills);
   };
 
-  // Function to delete a technical skill category
+
   const deleteTechnicalSkillCategory = (id) => {
     const updatedSkills = technicalSkills.filter((skill) => skill.id !== id);
     setTechnicalSkills(updatedSkills);
@@ -294,24 +315,16 @@ function App() {
 
   const downloadLatex = () => {
     const latexContent = generateLatex();
+        const blob = new Blob([latexContent], { type: 'text/plain' });
     
-    // Create a Blob with the LaTeX content
-    const blob = new Blob([latexContent], { type: 'text/plain' });
-    
-    // Create a link element
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    
-    // Set the file name
     link.download = 'resume.tex';
     
-    // Append the link to the body
     document.body.appendChild(link);
     
-    // Trigger the download
     link.click();
     
-    // Clean up
     document.body.removeChild(link);
   };
 
@@ -319,24 +332,20 @@ function App() {
       const encodedLatex = encodeURIComponent(generateLatex());
       const compileUrl = `https://latexonline.cc/compile?text=${encodedLatex}`;
     
-      // Create a hidden form element
       const form = document.createElement('form');
       form.action = compileUrl;
       form.method = 'GET';
-      form.target = '_blank'; // Open the response in a new tab/window
-    
-      // Create a hidden input field to hold the LaTeX content
+      form.target = '_blank';
+
       const input = document.createElement('input');
       input.type = 'hidden';
       input.name = 'text';
       input.value = generateLatex();
       form.appendChild(input);
-    
-      // Append the form to the document body and submit it
+
       document.body.appendChild(form);
       form.submit();
     
-      // Remove the form from the document after submission
       document.body.removeChild(form);
     };
      
@@ -370,8 +379,8 @@ function App() {
                   "companyName": "XYZ Innovations",
                   "jobTitle": "Software Developer",
                   "location": "San Francisco, CA",
-                  "startDate": "2015-09", // using YYYY-MM format for month input
-                  "endDate": "2018-05",   // using YYYY-MM format for month input
+                  "startDate": "2015-09", 
+                  "endDate": "2018-05",   
                   "descriptions": [
                       "Designed and implemented RESTful APIs for a scalable backend infrastructure",
                       "Integrated third-party APIs for payment processing and user authentication"
@@ -384,8 +393,8 @@ function App() {
                   "schoolName": "University of Example",
                   "degree": "Master of Science in Computer Science",
                   "location": "Example City, CA",
-                  "startDate": "2015-09", // using YYYY-MM format for month input
-                  "endDate": "2018-05",   // using YYYY-MM format for month input
+                  "startDate": "2015-09", 
+                  "endDate": "2018-05",   
                   "descriptions": [
                       "Focused on distributed systems and cloud computing",
                       "Thesis on optimization algorithms for large-scale data processing"
@@ -396,8 +405,8 @@ function App() {
                   "schoolName": "Example State College",
                   "degree": "Bachelor of Science in Computer Engineering",
                   "location": "Example Town, CA",
-                  "startDate": "2015-09", // using YYYY-MM format for month input
-                  "endDate": "2018-05",   // using YYYY-MM format for month input
+                  "startDate": "2015-09", 
+                  "endDate": "2018-05",   
                   "descriptions": [
                       "Graduated with highest honors",
                       "Coursework in computer architecture, embedded systems, and digital signal processing"
@@ -428,7 +437,6 @@ function App() {
           ]
   };
   
-    // Assuming setPersonalInfo, setObjective, setWorkExperiences, setEducations, and setTechnicalSkills are functions to set data in your application state
     setPersonalInfo(sampleData.personalInfo);
     setObjective(sampleData.objective);
     setWorkExperiences(sampleData.workExperiences);
@@ -442,79 +450,91 @@ function App() {
     <h1 className="text-center mb-4">Resume Builder</h1>
     {/* <h5 className="text-center text-primary">No data validation done (i.e. Making sure valid LinkedIn profile).</h5> */}
   
-    {/* Buttons Section */}
     <div className="text-center mb-4">
       <button className="btn btn-primary mr-3" onClick={loadSampleData}>
         Load Sample Data
+      </button>
+
+      
+      <button
+          className="btn btn-success mr-3"
+          onClick={downloadResume}
+          style={{ }}
+        >
+          Download PDF Resume
+        </button>
+
+        <button className="btn btn-danger mr-3" onClick={clearAllFields}>
+        Clear
       </button>
     </div>
   
 
       {/* Personal Information Section */}
       <div className="section-container" style={{ backgroundColor: '#fff', border: '1px solid #dee2e6', borderRadius: '5px', padding: '20px', marginBottom: '20px' }}>
-        
-        <div className="section-heading" style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '15px', borderBottom: '1px solid #dee2e6', paddingBottom: '10px' }}>Personal Information</div>
-        <form>
-          <div className="form-row" style={{ marginBottom: '15px' }}>
-            <div className="form-group col-md-6">
-              <label htmlFor="inputName">Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="inputName"
-                value={personalInfo.name}
-                onChange={handlePersonalInfoChange}
-                required
-              />
-            </div>
-            <div className="form-group col-md-6">
-              <label htmlFor="inputEmail">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                id="inputEmail"
-                value={personalInfo.email}
-                onChange={handlePersonalInfoChange}
-                required
-              />
-            </div>
+      <div className="section-heading" style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '15px', borderBottom: '1px solid #dee2e6', paddingBottom: '10px' }}>Personal Information</div>
+      <form>
+        <div className="form-row" style={{ marginBottom: '15px' }}>
+          <div className="form-group col-md-6">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              value={personalInfo.name}
+              onChange={handlePersonalInfoChange}
+              required
+            />
           </div>
-          <div className="form-row" style={{ marginBottom: '15px' }}>
-            <div className="form-group col-md-6">
-              <label htmlFor="inputPhone">Phone Number</label>
-              <input
-                type="tel"
-                className="form-control"
-                id="inputPhone"
-                value={personalInfo.phone}
-                onChange={handlePersonalInfoChange}
-                required
-              />
-            </div>
-            <div className="form-group col-md-6">
-              <label htmlFor="inputLinkedIn">LinkedIn</label>
-              <input
-                type="url"
-                className="form-control"
-                id="inputLinkedIn"
-                value={personalInfo.linkedin}
-                onChange={handlePersonalInfoChange}
-              />
-            </div>
+          <div className="form-group col-md-6">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              value={personalInfo.email}
+              onChange={handlePersonalInfoChange}
+              required
+            />
           </div>
-          <div className="form-group">
-            <label htmlFor="inputGithub">GitHub</label>
+        </div>
+        <div className="form-row" style={{ marginBottom: '15px' }}>
+          <div className="form-group col-md-6">
+            <label htmlFor="phone">Phone Number</label>
+            <input
+              type="tel"
+              className="form-control"
+              id="phone"
+              value={personalInfo.phone}
+              onChange={handlePersonalInfoChange}
+              required
+            />
+          </div>
+          <div className="form-group col-md-6">
+            <label htmlFor="linkedin">LinkedIn</label>
             <input
               type="url"
               className="form-control"
-              id="inputGithub"
-              value={personalInfo.github}
+              id="linkedin"
+              value={personalInfo.linkedin}
               onChange={handlePersonalInfoChange}
             />
           </div>
-        </form>
-      </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="github">GitHub</label>
+          <input
+            type="url"
+            className="form-control"
+            id="github"
+            value={personalInfo.github}
+            onChange={handlePersonalInfoChange}
+          />
+        </div>
+      </form>
+    </div>
 
+    
       {/* Objective Section */}
       <div className="section-container" style={{ backgroundColor: '#fff', border: '1px solid #dee2e6', borderRadius: '5px', padding: '20px', marginBottom: '20px' }}>
         <div className="section-heading" style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '15px', borderBottom: '1px solid #dee2e6', paddingBottom: '10px' }}>Objective</div>
