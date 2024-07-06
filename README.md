@@ -16,17 +16,6 @@ Resume Builder is a web application built with React that allows users to create
 
 - **Download Resume**: Generate a JSON file containing all entered information for downloading as a resume.
 
-## How to Use
-
-1. **Access the Website**: Visit our [Resume Builder Website](https://www.example.com) to start using the application.
-   
-2. **Create Your Resume**:
-   - Fill in your resume details using the provided input fields.
-   - Utilize the "Add" and "Delete" buttons to manage work experiences, education details, and technical skills.
-   
-3. **Download Your Resume**:
-   - After entering your information, click on the "Download Resume" button to obtain the JSON file of your resume data.
-
 ## Demo
 
 To see a live demo of the Resume Builder application, visit [Resume Builder Website](https://www.example.com).
