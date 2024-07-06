@@ -456,13 +456,13 @@ function App() {
       </button>
 
       
-      <button
-          className="btn btn-success mr-3"
+      {/* <button
+          className="btn btn-primary mr-3"
           onClick={downloadResume}
           style={{ }}
         >
           Download PDF Resume
-        </button>
+        </button> */}
 
         <button className="btn btn-danger mr-3" onClick={clearAllFields}>
         Clear
