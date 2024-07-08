@@ -32,7 +32,7 @@ const App = () => {
                   onClick={openPdfPopup}
                   className="btn btn-secondary btn-block mt-3 rounded"
                 >
-                  Show Jake's Resume (PDF)
+                  Jake's Resume Sample (PDF)
                 </button>
                 <button
                   onClick={toggleJakesResume}

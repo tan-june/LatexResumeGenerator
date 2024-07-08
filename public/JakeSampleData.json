@@ -1,0 +1,84 @@
+{
+    "personalInfo": {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "phone": "123-456-7890",
+        "linkedin": "https://www.linkedin.com/in/",
+        "github": "https://github.com/"
+    },
+    "objective": "Experienced software engineer passionate about building robust web applications and solving complex technical challenges.",
+    "workExperiences": [
+        {
+            "id": 1,
+            "companyName": "ABC Tech Solutions",
+            "jobTitle": "Senior Software Engineer",
+            "location": "New York, NY",
+            "startDate": "2015-09", 
+            "endDate": "2018-05",  
+            "descriptions": [
+                "Led development of a microservices architecture using Docker and Kubernetes",
+                "Managed a team of 5 developers, ensuring adherence to coding standards and project timelines"
+            ]
+        },
+        {
+            "id": 2,
+            "companyName": "XYZ Innovations",
+            "jobTitle": "Software Developer",
+            "location": "San Francisco, CA",
+            "startDate": "2015-09", 
+            "endDate": "2018-05",   
+            "descriptions": [
+                "Designed and implemented RESTful APIs for a scalable backend infrastructure",
+                "Integrated third-party APIs for payment processing and user authentication"
+            ]
+        }
+    ],
+    "educations": [
+        {
+            "id": 1,
+            "schoolName": "University of Example",
+            "degree": "Master of Science in Computer Science",
+            "location": "Example City, CA",
+            "startDate": "2015-09", 
+            "endDate": "2018-05",   
+            "descriptions": [
+                "Focused on distributed systems and cloud computing",
+                "Thesis on optimization algorithms for large-scale data processing"
+            ]
+        },
+        {
+            "id": 2,
+            "schoolName": "Example State College",
+            "degree": "Bachelor of Science in Computer Engineering",
+            "location": "Example Town, CA",
+            "startDate": "2015-09", 
+            "endDate": "2018-05",   
+            "descriptions": [
+                "Graduated with highest honors",
+                "Coursework in computer architecture, embedded systems, and digital signal processing"
+            ]
+        }
+    ],
+    "technicalSkills": [
+        {
+            "id": 1,
+            "category": "Frontend Development",
+            "values": "React, Angular, Vue.js, JavaScript, HTML, CSS, Sass"
+        },
+        {
+            "id": 2,
+            "category": "Backend Development",
+            "values": "Node.js, Python, Ruby on Rails, Express, MongoDB, PostgreSQL"
+        },
+        {
+            "id": 3,
+            "category": "DevOps",
+            "values": "Docker, Kubernetes, AWS, Azure, Jenkins"
+        },
+        {
+            "id": 4,
+            "category": "Database Systems",
+            "values": "MySQL, PostgreSQL, MongoDB, Redis"
+        }
+    ]
+}
