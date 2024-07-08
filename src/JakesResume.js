@@ -448,21 +448,22 @@ function JakesResume({toggle}) {
   return (
     <div className="container mt-4">
     <h1 className="text-center mb-4">Jake's Resume Builder</h1>
-    {/* <h5 className="text-center text-primary">No data validation done (i.e. Making sure valid LinkedIn profile).</h5> */}
   
     <div className="text-center mb-4">
-      <button className="btn btn-primary mr-3" onClick={loadSampleData}>
-        Load Sample Data
-      </button>
-
-      
-      <button
+    {/* <h5 className="text-center text-primary">No data validation done (i.e. Making sure valid LinkedIn profile).</h5> */}
+    <button
           className="btn btn-primary mr-3"
           onClick={toggle}
           style={{ }}
         >
           Back to Home Page
         </button>
+</div>
+      <div className="text-center mb-4">
+      
+      <button className="btn btn-primary mr-3" onClick={loadSampleData}>
+        Load Sample Data
+      </button>
 
         <button className="btn btn-danger mr-3" onClick={clearAllFields}>
         Clear
