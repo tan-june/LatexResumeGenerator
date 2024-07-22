@@ -3,11 +3,7 @@ import "./App.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
-//add validation that it exists
-//check if its a link
-//add present tag for dates
-
-function JakesResume({ toggle }) {
+function BluesResume({ toggle }) {
   const [personalInfo, setPersonalInfo] = useState({
     name: "",
     email: "",
@@ -148,151 +144,142 @@ function JakesResume({ toggle }) {
     return `${monthNames[parseInt(month, 10) - 1]} ${year}`;
   };
 
+
   const generateLatex = () => {
-    console.log({personalInfo, objective, workExperiences, educations, technicalSkills});
     return `
-\\documentclass[letterpaper,11pt]{article}
-
-\\usepackage{latexsym}
-\\usepackage[empty]{fullpage}
-\\usepackage{titlesec}
-\\usepackage{marvosym}
-\\usepackage[usenames,dvipsnames]{color}
-\\usepackage{verbatim}
-\\usepackage{enumitem}
-\\usepackage[hidelinks]{hyperref}
-\\usepackage{fancyhdr}
-\\usepackage[english]{babel}
-\\usepackage{tabularx}
-\\input{glyphtounicode}
-
-
-\\pagestyle{fancy}
-\\fancyhf{} % clear all header and footer fields
-\\fancyfoot{}
-\\renewcommand{\\headrulewidth}{0pt}
-\\renewcommand{\\footrulewidth}{0pt}
-
-\\addtolength{\\oddsidemargin}{-0.5in}
-\\addtolength{\\evensidemargin}{-0.5in}
-\\addtolength{\\textwidth}{1in}
-\\addtolength{\\topmargin}{-.5in}
-\\addtolength{\\textheight}{1.0in}
-
-\\urlstyle{same}
-
-\\raggedbottom
-\\raggedright
-\\setlength{\\tabcolsep}{0in}
-\\titleformat{\\section}{
-  \\vspace{-4pt}\\scshape\\raggedright\\large
-}{}{0em}{}[\\color{black}\\titlerule \\vspace{-5pt}]
-
-\\pdfgentounicode=1
-
-\\newcommand{\\resumeItem}[1]{
-  \\item\\small{
-    {#1 \\vspace{-2pt}}
-  }
-}
-
-\\newcommand{\\resumeSubheading}[4]{
-  \\vspace{-2pt}\\item
-    \\begin{tabular*}{0.97\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}
-      \\textbf{#1} & #2 \\\\
-      \\textit{\\small#3} & \\textit{\\small #4} \\\\
-    \\end{tabular*}\\vspace{-7pt}
-}
-
-\\newcommand{\\resumeSubSubheading}[2]{
-    \\item
-    \\begin{tabular*}{0.97\\textwidth}{l@{\\extracolsep{\\fill}}r}
-      \\textit{\\small#1} & \\textit{\\small #2} \\\\
-    \\end{tabular*}\\vspace{-7pt}
-}
-
-\\newcommand{\\resumeProjectHeading}[2]{
-    \\item
-    \\begin{tabular*}{0.97\\textwidth}{l@{\\extracolsep{\\fill}}r}
-      \\small#1 & #2 \\\\
-    \\end{tabular*}\\vspace{-7pt}
-}
-
-\\newcommand{\\resumeSubItem}[1]{\\resumeItem{#1}\\vspace{-4pt}}
-\\renewcommand\\labelitemii{$\\vcenter{\\hbox{\\tiny$\\bullet$}}$}
-\\newcommand{\\resumeSubHeadingListStart}{\\begin{itemize}[leftmargin=0.15in, label={}]}
-\\newcommand{\\resumeSubHeadingListEnd}{\\end{itemize}}
-\\newcommand{\\resumeItemListStart}{\\begin{itemize}}
-\\newcommand{\\resumeItemListEnd}{\\end{itemize}\\vspace{-5pt}}
-
-\\begin{document}
-
-\\begin{center}
-    \\textbf{\\Huge \\scshape ${personalInfo.name}} \\\\ \\vspace{1pt}
-    \\small ${personalInfo.phone} $|$ \\href{mailto:${
-      personalInfo.email
-    }}{\\underline{${personalInfo.email}}} $|$ 
-    \\href{${personalInfo.linkedin}}{\\underline{${personalInfo.linkedin}}} $|$
-    \\href{${personalInfo.github}}{\\underline{${personalInfo.github}}}
-\\end{center}
-
-\\section{Objective}
-    ${objective}
-
-\\section{Education}
-  \\resumeSubHeadingListStart
-    ${educations
-      .map(
-        (edu) => `
-      \\resumeSubheading
-        {${edu.schoolName}}{${edu.location}}
-        {${edu.degree}}{${formatDate(edu.startDate)} -- ${formatDate(
-          edu.endDate
-        )}}
-        \\resumeItemListStart
-          ${edu.descriptions.map((desc) => `\\resumeItem{${desc}}`).join("")}
-        \\resumeItemListEnd
-
-    `
-      )
-      .join("")}
-  \\resumeSubHeadingListEnd
-
-\\section{Experience}
-  \\resumeSubHeadingListStart
-    ${workExperiences
-      .map(
-        (exp) => `
-      \\resumeSubheading
-        {${exp.companyName}}{${exp.location}}
-    {${exp.jobTitle}} {${formatDate(exp.startDate)} -- ${formatDate(
-          exp.endDate
-        )}}
-
-        \\resumeItemListStart
-          ${exp.descriptions.map((desc) => `\\resumeItem{${desc}}`).join("")}
-        \\resumeItemListEnd
-    `
-      )
-      .join("")}
-  \\resumeSubHeadingListEnd
-
-\\section{Technical Skills}
- \\begin{itemize}[leftmargin=0.15in, label={}]
-    \\small{${technicalSkills
-      .map(
-        (skill) => `
-      \\item{
-       \\textbf{${skill.category}}{: ${skill.values}} \\\\
+    \\documentclass[letterpaper,12pt]{article}
+    \\usepackage[empty]{fullpage}
+    \\usepackage{enumitem}
+    \\usepackage{ifxetex}
+    \\ifxetex
+      \\usepackage{fontspec}
+      \\usepackage[xetex]{hyperref}
+    \\else
+      \\usepackage[utf8]{inputenc}
+      \\usepackage[T1]{fontenc}
+      \\usepackage[pdftex]{hyperref}
+    \\fi
+    \\usepackage{fontawesome}
+    \\usepackage[sfdefault,light]{FiraSans}
+    \\usepackage{anyfontsize}
+    \\usepackage{xcolor}
+    \\usepackage{tabularx}
+  
+    \\def \\headertype {\\doublecol}
+    \\def \\entryspacing {-0pt}
+    \\def \\bulletstyle {\\faAngleRight}
+    \\definecolor{primary}{HTML}{000000}
+    \\definecolor{secondary}{HTML}{0D47A1}
+    \\definecolor{accent}{HTML}{263238}
+    \\definecolor{links}{HTML}{1565C0}
+  
+    \\newcommand{\\linkedin}{\\faLinkedin \\hspace{3pt} \\href{https://linkedin.com/in/dwight-schrute/}{/dwight-schrute}}
+    \\newcommand{\\phone}{\\faPhone \\hspace{3pt} +1-123-456-7890}
+    \\newcommand{\\email}{\\faEnvelope \\hspace{3pt} \\href{mailto:dschrute@dundermifflin.com}{dschrute@dundermifflin.com}}
+    \\newcommand{\\github}{\\faGithub \\hspace{3pt} \\href{https://github.com/dwight-schrute}{/dwight-schrute}}
+    \\newcommand{\\website}{\\faGlobe \\hspace{3pt} \\href{https://dwightschrute.com/}{dwightschrute.com}}
+  
+    \\newcommand{\\fullname}{Your Name} % Define your name
+    \\newcommand{\\subtitle}{Your Subtitle} % Define your subtitle
+  
+    \\addtolength{\\oddsidemargin}{-0.55in}
+    \\addtolength{\\evensidemargin}{-0.55in}
+    \\addtolength{\\textwidth}{1.1in}
+    \\addtolength{\\topmargin}{-0.6in}
+    \\addtolength{\\textheight}{1.1in}
+    \\hypersetup{
+        colorlinks=true,
+        urlcolor=links,
+    }
+    \\raggedbottom
+    \\raggedright
+    \\setlength{\\tabcolsep}{0in}
+    \\renewcommand{\\section}[2]{\\vspace{5pt}
+      \\colorbox{secondary}{\\color{white}\\raggedbottom\\normalsize\\textbf{{#1}{\\hspace{7pt}#2}}}
+    }
+    \\newcommand{\\resumeEntryStart}{\\begin{itemize}[leftmargin=2.5mm]}
+    \\newcommand{\\resumeEntryEnd}{\\end{itemize}\\vspace{\\entryspacing}}
+    \\newcommand{\\resumeItemListStart}{\\begin{itemize}[leftmargin=4.5mm]}
+    \\newcommand{\\resumeItemListEnd}{\\end{itemize}}
+    \\renewcommand{\\labelitemii}{\\bulletstyle}
+    \\newcommand{\\resumeItem}[1]{
+      \\item\\small{
+        {#1 \\vspace{-2pt}}
       }
-    `
-      )
-      .join("")}}
-
- \\end{itemize}
-\\end{document}
+    }
+    \\newcommand{\\resumeEntryTSDL}[4]{
+      \\vspace{-1pt}\\item[]
+        \\begin{tabularx}{0.97\\textwidth}{X@{\\hspace{60pt}}r}
+          \\textbf{\\color{primary}#1} & {\\firabook\\color{accent}\\small#2} \\\\
+          \\textit{\\color{accent}\\small#3} & \\textit{\\color{accent}\\small#4} \\\\
+        \\end{tabularx}\\vspace{-6pt}
+    }
+  
+    \\newcommand{\\resumeEntryS}[2]{
+      \\item[]\\small{
+        \\textbf{\\color{primary}#1 }{ #2 \\vspace{-6pt}}
+      }
+    }
+  
+    \\newcommand{\\doublecol}[6]{
+      \\begin{tabularx}{\\textwidth}{Xr}
+        {
+          \\begin{tabular}[c]{l}
+            \\fontsize{35}{45}\\selectfont{\\color{primary}{{\\textbf{\\fullname}}}} \\\\
+          \\end{tabular}
+        } & {
+          \\begin{tabular}[c]{l@{\\hspace{1.5em}}l}
+            {\\small#4} & {\\small#1} \\\\
+            {\\small#5} & {\\small#2} \\\\
+            {\\small#6} & {\\small#3}
+          \\end{tabular}
+        }
+      \\end{tabularx}
+    }
+  
+    \\begin{document}
+  
+    \\headertype{\\linkedin}{\\github}{\\website}{\\phone}{\\email}{} % Set the order of items here
+    \\vspace{-10pt} % Set a negative value to push the body up, and the opposite
+  
+    \\section{\\faBullseye}{Objective}
+    \\newline
+    \\newline
+    ${objective}
+  
+    \\section{\\faGraduationCap}{Education}
+    ${educations.map((a) => `
+      \\resumeEntryStart
+        \\resumeEntryTSDL
+          {${a.schoolName}}{${formatDate(a.startDate)} -- ${formatDate(a.endDate)}}
+          {${a.degree}}{${a.location}}
+          \\resumeItemListStart
+            ${a.descriptions.map(desc => `\\resumeItem{${desc}}`).join("")}
+          \\resumeItemListEnd
+        \\resumeEntryEnd
+    `).join("")}
+  
+    \\section{\\faPieChart}{Experience}
+    ${workExperiences.map(a => `
+      \\resumeEntryStart
+        \\resumeEntryTSDL
+          {${a.companyName}}{${formatDate(a.startDate)} -- ${formatDate(a.endDate)}}
+          {${a.jobTitle}}{${a.location}}
+          \\resumeItemListStart
+            ${a.descriptions.map(desc => `\\resumeItem{${desc}}`).join("")}
+          \\resumeItemListEnd
+        \\resumeEntryEnd
+    `).join("")}
+  
+    \\section{\\faGears}{Skills}
+    \\resumeEntryStart
+      ${technicalSkills.map(a => `\\resumeEntryS{${a.category}}{${a.values}}`).join("")}
+    \\resumeEntryEnd
+  
+    \\end{document}
     `;
   };
+  
 
   const downloadLatex = () => {
     const latexContent = generateLatex();
@@ -350,7 +337,7 @@ function JakesResume({ toggle }) {
 
   return (
     <div className="container mt-4">
-      <h1 className="text-center mb-4">Jake's Resume Builder</h1>
+      <h1 className="text-center mb-4">Software Engineer's Resume Builder</h1>
 
       <div className="text-center mb-4">
         {/* <h5 className="text-center text-primary">No data validation done (i.e. Making sure valid LinkedIn profile).</h5> */}
@@ -1091,4 +1078,4 @@ function JakesResume({ toggle }) {
   );
 }
 
-export default JakesResume;
+export default BluesResume;
